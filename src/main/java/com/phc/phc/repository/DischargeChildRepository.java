@@ -1,6 +1,5 @@
 package com.phc.phc.repository;
 import com.phc.phc.entity.DischargeChildDetail;
-import com.phc.phc.model.DischargeChildModel;
 import com.phc.phc.model.DischargeDetailsModel;
 import com.phc.phc.model.DischargeModel;
 import com.phc.phc.model.DischargedPatientModel;
@@ -8,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 
 @Repository

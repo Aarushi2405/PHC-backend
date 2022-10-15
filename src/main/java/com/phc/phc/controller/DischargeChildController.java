@@ -1,18 +1,13 @@
 package com.phc.phc.controller;
 
 import com.phc.phc.entity.DischargeChildDetail;
-import com.phc.phc.model.DischargeChildModel;
 import com.phc.phc.model.DischargeDetailsModel;
 import com.phc.phc.model.DischargeModel;
 import com.phc.phc.model.DischargedPatientModel;
 import com.phc.phc.repository.DischargeChildRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -51,4 +46,13 @@ public class DischargeChildController {
     public List<String> getComorbidById(@PathVariable int dischargeId){
         return (List<String>) this.dischargeChildRepository.getComorbidById(dischargeId);
     }
+
+    @PostMapping("/discharge-child")
+    public String getDischargeChild(@RequestBody String dischargeDetails) {
+        return "Discharge Details:  " + dischargeDetails;
+    }
+
+
+
+
 }
