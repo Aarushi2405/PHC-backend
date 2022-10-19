@@ -1,6 +1,9 @@
 package com.phc.phc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -8,9 +11,21 @@ import java.util.List;
 public class FollowupDetails {
 
     @Id
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "followup_sequence"
+//    )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(
+//            name = "followup_sequence",
+//            sequenceName = "followup_sequence",
+//            allocationSize = 1
+//    )
     @Column(name="followup_id")
-    private int followup_id;
+    private int followupId;
+
+    @Column(name="followup_date")
+    private Date followupDate;
 
     @Column(name="height")
     private float height;
@@ -45,15 +60,26 @@ public class FollowupDetails {
     @Column(name="reason_not_coming")
     private String reasonNotComing;
 
-    @OneToMany(mappedBy = "followupDetails")
+    @Column(name="chief_complaints")
+    private String chiefComplaints;
+
+    @Column(name="provisional_diagnosis")
+    private String provisionalDiagnosis;
+
+    @Column(name="treatment")
+    private String treatment;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "followupDetails", cascade=CascadeType.ALL)
     private List<FollowupsSchedule> followupsSchedule;
 
-    public int getFollowup_id() {
-        return followup_id;
+    public int getFollowupId() {
+        return followupId;
     }
 
-    public void setFollowup_id(int followup_id) {
-        this.followup_id = followup_id;
+    public void setFollowupId(int followupId) {
+        this.followupId = followupId;
     }
 
     public float getHeight() {
@@ -150,5 +176,60 @@ public class FollowupDetails {
 
     public void setFollowupsSchedule(List<FollowupsSchedule> followupsSchedule) {
         this.followupsSchedule = followupsSchedule;
+    }
+
+    public String getChiefComplaints() {
+        return chiefComplaints;
+    }
+
+    public void setChiefComplaints(String chiefComplaints) {
+        this.chiefComplaints = chiefComplaints;
+    }
+
+    public String getProvisionalDiagnosis() {
+        return provisionalDiagnosis;
+    }
+
+    public void setProvisionalDiagnosis(String provisionalDiagnosis) {
+        this.provisionalDiagnosis = provisionalDiagnosis;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
+//    public FollowupDetails() {
+//
+//    }
+//
+//    public FollowupDetails(Date followupDate, float height, float weight, float muac, float headCircumference, float sdRange, String dietChart, String dietAdequacy, String coMorbidities, String otherSymptoms, String reasonFollowup, String reasonNotComing, String chiefComplaints, String provisionalDiagnosis, String treatment) {
+//        this.followupDate = followupDate;
+//        this.height = height;
+//        this.weight = weight;
+//        this.muac = muac;
+//        this.headCircumference = headCircumference;
+//        this.sdRange = sdRange;
+//        this.dietChart = dietChart;
+//        this.dietAdequacy = dietAdequacy;
+//        this.coMorbidities = coMorbidities;
+//        this.otherSymptoms = otherSymptoms;
+//        this.reasonFollowup = reasonFollowup;
+//        this.reasonNotComing = reasonNotComing;
+//        this.chiefComplaints = chiefComplaints;
+//        this.provisionalDiagnosis = provisionalDiagnosis;
+//        this.treatment = treatment;
+//        this.followupsSchedule = followupsSchedule;
+//    }
+
+    public Date getFollowupDate() {
+        return followupDate;
+    }
+
+    public void setFollowupDate(Date followupDate) {
+        this.followupDate = followupDate;
     }
 }

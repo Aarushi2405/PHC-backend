@@ -1,5 +1,7 @@
 package com.phc.phc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "nr.case_details")
+@JsonIgnoreProperties({"hibernateLazyInitializer","admissionComorbidConditions"})
 @NamedQuery(name = "CaseDetail.findAll", query = "SELECT c FROM CaseDetail c")
 public class CaseDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -68,16 +71,19 @@ public class CaseDetail implements Serializable {
 	private Boolean referedFromAw;*/
 
 	// bi-directional many-to-one association to AdmissionComorbidCondition
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<AdmissionComorbidCondition> admissionComorbidConditions;
 
 	// bi-directional many-to-one association to AdmissionCriteria
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<AdmissionCriteria> admissionCriterias;
 
 	// bi-directional many-to-one association to CaseAllocation
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<CaseAllocation> caseAllocations;
@@ -118,53 +124,74 @@ public class CaseDetail implements Serializable {
 	private NrcUser lastUpdatedBy;
 
 	// bi-directional many-to-one association to CaseMotherDetail
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<CaseMotherDetail> caseMotherDetails;
 
 	// bi-directional many-to-one association to CaseMotherGrowth
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<CaseMotherGrowth> caseMotherGrowths;
 
 	// bi-directional many-to-one association to CaseMotherSocialFactor
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<CaseMotherSocialFactor> caseMotherSocialFactors;
 
 	// bi-directional many-to-one association to CaseReferral
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<CaseReferral> caseReferrals;
 
 	// bi-directional many-to-one association to ChildGrowth
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<ChildGrowth> childGrowths;
 
 	// bi-directional many-to-one association to DischargeChildDetail
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<DischargeChildDetail> dischargeChildDetails;
 
 	// bi-directional many-to-one association to DischargeComorbidCondition
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<DischargeComorbidCondition> dischargeComorbidConditions;
 
 	// bi-directional many-to-one association to DischargeMotherDetail
+	@JsonIgnore
 	@OneToMany(mappedBy = "caseDetail")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<DischargeMotherDetail> dischargeMotherDetails;
 	
 	//bi-directional many-to-one association to Followup
+	@JsonIgnore
 	@OneToMany(mappedBy="caseDetail")
 	private List<Followup> followups;
 	
 	//bi-directional many-to-one association to FollowupSchedule
+	@JsonIgnore
 	@OneToMany(mappedBy="caseDetail")
 	private List<FollowupSchedule> followupSchedules;
-	
+
+	@JsonIgnore
+	@OneToMany(mappedBy="caseDetail")
+	private List<FollowupsSchedule> followupsSchedules;
+
+	public List<FollowupsSchedule> getFollowupsSchedules() {
+		return followupsSchedules;
+	}
+
+	public void setFollowupsSchedules(List<FollowupsSchedule> followupsSchedules) {
+		this.followupsSchedules = followupsSchedules;
+	}
 	//commented as part of Sneha-angan
 	//bi-directional many-to-one association to NrcSnehaMapping
 	/*@OneToMany(mappedBy="caseDetail")

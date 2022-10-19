@@ -1,5 +1,7 @@
 package com.phc.phc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -10,10 +12,10 @@ public class FollowupsSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
-    private int schedule_id;
+    private int scheduleId;
 
     @Column(name="followup_date")
-    private Timestamp followup_date;
+    private Timestamp followupDate;
 
     @Column(name="status")
     private String status;
@@ -21,6 +23,7 @@ public class FollowupsSchedule {
     @Column(name="type")
     private String type;
 
+//    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="case_id")
     private CaseDetail caseDetail;
@@ -29,20 +32,22 @@ public class FollowupsSchedule {
     @JoinColumn(name="followup_id")
     private FollowupDetails followupDetails;
 
+//    public void setCaseId(int caseId){ this.caseDetail.setCaseId(caseId);}
+//    public void setFollowupId(int followupId){this.followupDetails.setFollowupId(followupId);}
     public int getSchedule_id() {
-        return schedule_id;
+        return scheduleId;
     }
 
-    public void setSchedule_id(int schedule_id) {
-        this.schedule_id = schedule_id;
+    public void setSchedule_id(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
-    public Timestamp getFollowup_date() {
-        return followup_date;
+    public Timestamp getFollowupDate() {
+        return followupDate;
     }
 
-    public void setFollowup_date(Timestamp followup_date) {
-        this.followup_date = followup_date;
+    public void setFollowupDate(Timestamp followupDate) {
+        this.followupDate = followupDate;
     }
 
     public String getStatus() {

@@ -14,7 +14,7 @@ public interface DischargeChildRepository extends JpaRepository<DischargeChildDe
 //    @Query("SELECT u.dischargeId, u.avgWeightGainKg FROM DischargeChildDetail u")
 //    List<String> getDischarge();
 
-    @Query("SELECT u.caseDetail.childDemography.rchId as rchId, u.caseDetail.childDemography.name as name, u.createdOn as dischargeDate, u.dischargeId as dischargeId FROM DischargeChildDetail u")
+    @Query("SELECT u.caseDetail.samNum as rchId, u.caseDetail.childDemography.name as name, u.createdOn as dischargeDate, u.dischargeId as dischargeId FROM DischargeChildDetail u")
     List<DischargedPatientModel> getDischarge();
 
     @Query("SELECT u.caseDetail.samNum as samId, u.caseDetail.childDemography.name as name FROM DischargeChildDetail u where u.dischargeId = ?1")
