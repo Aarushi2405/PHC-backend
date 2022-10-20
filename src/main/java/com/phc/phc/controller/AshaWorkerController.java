@@ -7,9 +7,7 @@ import com.phc.phc.repository.AshaChildRepository;
 import com.phc.phc.repository.AshaWorkerRepository;
 import com.phc.phc.repository.DischargeChildRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +23,14 @@ public class AshaWorkerController {
 
     @GetMapping("/asha-worker")
     public List<AshaWorker> getAshaWorker(){
+        System.out.println("HERE");
         return (List<AshaWorker>) this.ashaWorkerRepository.findAll();
     }
 
+//    @RequestMapping("/asha-worker-search")
+//    public @ResponseBody List<AshaWorker> getAshaWorkerFromLocation(@RequestParam String ward, @RequestParam String area, @RequestParam String pincode) {
+////        return (List<AshaWorker>) this.ashaWorkerRepository.findByWardOrAreaOrPincode(ward, area, pincode);
+//    }
 
 
 }

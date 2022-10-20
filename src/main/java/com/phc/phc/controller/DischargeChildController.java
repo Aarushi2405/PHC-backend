@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -32,15 +33,30 @@ public class DischargeChildController {
     }
 
     @GetMapping("/patient/{dischargeId}")
-    public List<DischargeDetailsModel> getDischargeSummary(@PathVariable int dischargeId){
-        return (List<DischargeDetailsModel>) this.dischargeChildRepository.findByDischargeId(dischargeId);
+    public Optional<DischargeDetailsModel> getDischargeSummary(@PathVariable int dischargeId){
+        return (Optional<DischargeDetailsModel>) this.dischargeChildRepository.findByDischargeId(dischargeId);
     }
 
+    @GetMapping("/get-discharge/{dischargeId}")
+    public Optional<DischargeModel> getDischargeSummaryById(@PathVariable int dischargeId){
+        return (Optional<DischargeModel>) this.dischargeChildRepository.getDischargeById(dischargeId);
+    }
+
+    // @GetMapping("/patient/{samId}")
+    // public List<DischargeDetailsModel> getDischargeBySamId(@PathVariable int samId){
+    //     return (List<DischargeDetailsModel>) this.dischargeChildRepository.findBySamId(samId);
+    // }
 
     @GetMapping("/discharge/{dischargeId}")
-    public List<DischargeModel> getDischargeById(@PathVariable int dischargeId){
-        return (List<DischargeModel>) this.dischargeChildRepository.getDischargeById(dischargeId);
+    public Optional<DischargeModel> getDischargeById(@PathVariable int dischargeId){
+        return (Optional<DischargeModel>) this.dischargeChildRepository.getDischargeById(dischargeId);
     }
+
+    // @GetMapping("/patient/{rchId}")
+    // public Optional<Patient> getPatientById(@PathVariable String rchId) {
+    //     System.out.println("RCH ID " + rchId);
+    // 	return this.patientRepository.findByRchId(rchId);
+    // }
 
     @GetMapping("/discharge-comorbid/{dischargeId}")
     public List<String> getComorbidById(@PathVariable int dischargeId){
