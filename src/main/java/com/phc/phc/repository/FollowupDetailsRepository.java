@@ -11,4 +11,7 @@ public interface FollowupDetailsRepository extends JpaRepository<FollowupDetails
 
 //    @Query("SELECT u from FollowupDetails u order by u.followupId FETCH FIRST 1 ROWS ONLY")
 Optional<FollowupDetails> findTopByOrderByFollowupIdDesc();
+
+@Query(value="Select u from FollowupDetails u where u.followupId=?1")
+    FollowupDetails getFollowupById(int followupId);
 }

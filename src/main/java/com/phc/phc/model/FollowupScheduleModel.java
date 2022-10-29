@@ -13,5 +13,7 @@ public interface FollowupScheduleModel {
     String getStatus();
     String getType();
 
+    String getAshaMobileNumber();
+
 
 }

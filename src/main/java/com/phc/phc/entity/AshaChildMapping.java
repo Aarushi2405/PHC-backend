@@ -18,6 +18,17 @@ public class AshaChildMapping {
     @Column(name="case_id")
     private int caseId;
 
+//    @Column(name="asha_id")
+//    private int ashaId;
+//
+//    public int getAshaId() {
+//        return ashaId;
+//    }
+//
+//    public void setAshaId(int ashaId) {
+//        this.ashaId = ashaId;
+//    }
+
     @ManyToOne
     @JoinColumn(name = "asha_id")
     private AshaWorker ashaWorker;

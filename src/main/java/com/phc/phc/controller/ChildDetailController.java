@@ -30,11 +30,13 @@ public class ChildDetailController {
     public List<CaseDetail> getCaseDetail(){return (List<CaseDetail>) this.childDetailRepository.findAll();}
 
     @GetMapping("/child/{caseId}")
-    public List<ChildDetailsModel> getCaseDetails(@PathVariable int caseId){return (List<ChildDetailsModel>) this.childDetailRepository.getDetails(caseId);}
+    public ChildDetailsModel getCaseDetails(@PathVariable int caseId){return (ChildDetailsModel) this.childDetailRepository.getDetails(caseId);}
 
     @GetMapping("/child-details/{samId}")
-    public Optional<ChildDetailsModel> getCaseDetailsFromSamId(@PathVariable int samId){return (Optional<ChildDetailsModel>) this.childDetailRepository.getDetailsFromSamId(samId);}
+    public List<ChildDetailsModel> getCaseDetailsFromSamId(@PathVariable int samId){return (List<ChildDetailsModel>) this.childDetailRepository.getDetailsFromSamId(samId);}
 
+    @GetMapping("/track-child")
+    public List<ChildDetailsModel> getChild() {return this.childDetailRepository.getChild();}
 
 
 }

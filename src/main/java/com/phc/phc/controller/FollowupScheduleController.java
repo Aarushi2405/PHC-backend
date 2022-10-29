@@ -3,11 +3,13 @@ package com.phc.phc.controller;
 import com.phc.phc.entity.FollowupDetails;
 import com.phc.phc.entity.FollowupsSchedule;
 import com.phc.phc.model.*;
+import com.phc.phc.repository.ChildDetailRepository;
 import com.phc.phc.repository.FollowupDetailsRepository;
 import com.phc.phc.repository.FollowupScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -17,11 +19,13 @@ public class FollowupScheduleController {
 
     private final FollowupScheduleRepository followupScheduleRepository;
     private final FollowupDetailsRepository followupDetailsRepository;
-
+    private final ChildDetailRepository childDetailRepository;
+//    private final
     @Autowired
-    public  FollowupScheduleController(FollowupScheduleRepository followupScheduleRepository, FollowupDetailsRepository followupDetailsRepository){
+    public  FollowupScheduleController(FollowupScheduleRepository followupScheduleRepository, FollowupDetailsRepository followupDetailsRepository, ChildDetailRepository childDetailRepository){
         this.followupScheduleRepository = followupScheduleRepository;
         this.followupDetailsRepository = followupDetailsRepository;
+        this.childDetailRepository = childDetailRepository;
     }
 
     @GetMapping("/followups")
@@ -35,6 +39,11 @@ public class FollowupScheduleController {
     @GetMapping("/followups-schedule")
     public List<FollowupScheduleModel> getFollowupScheduless(){
         return (List<FollowupScheduleModel>)this.followupScheduleRepository.getFollowupSchedules();
+    }
+
+    @GetMapping("/followups-schedule/{caseId}")
+    public List<FollowupScheduleModel> getFollowupScheduleById(@PathVariable int caseId){
+        return (List<FollowupScheduleModel>)this.followupScheduleRepository.getFollowupScheduleById(caseId);
     }
 
     @GetMapping("/followup-dates/{caseId}")
@@ -87,17 +96,26 @@ public class FollowupScheduleController {
     }
 
     @PostMapping("/followup-schedule")
-    void addFollowup(@RequestBody FollowupsSchedule followupsSchedule){
+    void addFollowup(@RequestBody FollowupsModel followupsSchedule){
 //        FollowupDetails followupDetails1= new FollowupDetails();
 //        int id = followupDetails1.getFollowupId();
 //        followupDetails1 = followupDetails;
 //        followupDetails.setFollowupId(20);
-        System.out.println("SAVE FOLLOWUP"+ followupsSchedule.getFollowupDate());
+//        System.out.println("SAVE FOLLOWUP"+ followupsSchedule.getFollowupDate());
 //        System.out.println("FOLLOWUP id"+followupDetails.getFollowupId());
 //        System.out.println("FOLLOWUP iddd"+id);
 //        System.out.println("FOLLOWUP "+followupDetails);
 //        followupDetailsRepository.save(followupDetails);
-        followupScheduleRepository.save(followupsSchedule);
+        FollowupsSchedule s = new FollowupsSchedule();
+        System.out.println("CASEEEE iddd"+followupsSchedule.getCaseId());
+        System.out.println("FOLLOWUP iddd"+followupsSchedule.getFollowupId());
+//        Time
+        s.setFollowupDate(new Timestamp(System.currentTimeMillis()));
+        s.setType("GENERAL");
+        s.setStatus("DONE");
+        s.setCaseDetail(this.childDetailRepository.getById(Math.toIntExact(followupsSchedule.getCaseId())));
+        s.setFollowupDetails(this.followupDetailsRepository.getFollowupById(Math.toIntExact(followupsSchedule.getFollowupId())));
+        followupScheduleRepository.save(s);
 //        followupDetailsRepository.
     }
 

@@ -8,6 +8,7 @@ public interface ChildDetailsModel {
     int getSamNum();
     String getAddress();
     Long getRchId();
+    Timestamp getAdmissionDate();
     Timestamp getDischargeDate();
     BigDecimal getDischargeSd();
     Integer getPincode();

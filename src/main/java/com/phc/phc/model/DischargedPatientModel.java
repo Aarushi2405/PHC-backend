@@ -8,6 +8,9 @@ public interface DischargedPatientModel {
      String getName();
      Timestamp getDischargeDate();
      String getDischargeId();
+     String getSamId();
+
+     Integer getCaseId();
 //    public Long getRchId() {
 //        return rchId;
 //    }

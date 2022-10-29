@@ -94,6 +94,14 @@ public class FollowupsModel {
         this.nextNrc = nextNrc;
     }
 
+    public FollowupsModel() {
+    }
+
+    public FollowupsModel(Long caseId, Long followupId) {
+        this.caseId = caseId;
+        this.followupId = followupId;
+    }
+
     public FollowupsModel(Long samNum, Long caseId, Long followupId, Long scheduleId, String childName, String ashaName, Long followupsDone, Date nextCommunity, Date nextNrc) {
         this.caseId = caseId;
         this.followupId = followupId;

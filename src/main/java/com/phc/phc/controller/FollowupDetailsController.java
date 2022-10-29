@@ -31,9 +31,9 @@ public class FollowupDetailsController {
 //        followupDetails1 = followupDetails;
 //        followupDetails.setFollowupId(20);
 //        System.out.println(caseId);
-        System.out.println("FOLLOWUP id"+followupDetails.getFollowupId());
+//        System.out.println("FOLLOWUP id"+followupDetails.getFollowupId());
 //        System.out.println("FOLLOWUP iddd"+id);
-        System.out.println("FOLLOWUP "+followupDetails);
+//        System.out.println("FOLLOWUP "+followupDetails);
         followupDetailsRepository.save(followupDetails);
 
 //        followupDetailsRepository.
