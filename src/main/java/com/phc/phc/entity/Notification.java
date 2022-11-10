@@ -3,6 +3,7 @@ package com.phc.phc.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,17 @@ public class Notification {
 
     @Column(name="accept_status")
     private String acceptStatus;
+
+    @Column(name="date")
+    private Timestamp date;
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
 
     public int getCaseId() {
         return caseId;

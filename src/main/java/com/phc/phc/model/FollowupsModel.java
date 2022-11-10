@@ -13,6 +13,35 @@ public class FollowupsModel {
     private Date nextCommunity;
     private Date nextNrc;
 
+    private Long ashaId;
+
+    private String ashaNumber;
+    private Long rchId;
+
+    public Long getRchId() {
+        return rchId;
+    }
+
+    public void setRchId(Long rchId) {
+        this.rchId = rchId;
+    }
+
+    public String getAshaNumber() {
+        return ashaNumber;
+    }
+
+    public void setAshaNumber(String ashaNumber) {
+        this.ashaNumber = ashaNumber;
+    }
+
+    public Long getAshaId() {
+        return ashaId;
+    }
+
+    public void setAshaId(Long ashaId) {
+        this.ashaId = ashaId;
+    }
+
     public Long getSamNum() {
         return samNum;
     }
@@ -85,13 +114,15 @@ public class FollowupsModel {
         this.scheduleId = scheduleId;
     }
 
-    public FollowupsModel(Long samNum, String childName, String ashaName, Long followupsDone, Date nextCommunity, Date nextNrc) {
+    public FollowupsModel(Long samNum, String childName, String ashaName, Long ashaId, String ashaNumber, Long followupsDone, Date nextCommunity, Date nextNrc) {
         this.samNum = samNum;
         this.childName = childName;
         this.ashaName = ashaName;
         this.followupsDone = followupsDone;
         this.nextCommunity = nextCommunity;
         this.nextNrc = nextNrc;
+        this.ashaId = ashaId;
+        this.ashaNumber = ashaNumber;
     }
 
     public FollowupsModel() {
@@ -102,8 +133,9 @@ public class FollowupsModel {
         this.followupId = followupId;
     }
 
-    public FollowupsModel(Long samNum, Long caseId, Long followupId, Long scheduleId, String childName, String ashaName, Long followupsDone, Date nextCommunity, Date nextNrc) {
+    public FollowupsModel(Long samNum, Long rchId, Long caseId, Long followupId, Long scheduleId, String childName, String ashaName, Long ashaId, String ashaNumber, Long followupsDone, Date nextCommunity, Date nextNrc) {
         this.caseId = caseId;
+        this.rchId = rchId;
         this.followupId = followupId;
         this.scheduleId = scheduleId;
         this.samNum = samNum;
@@ -112,5 +144,7 @@ public class FollowupsModel {
         this.followupsDone = followupsDone;
         this.nextCommunity = nextCommunity;
         this.nextNrc = nextNrc;
+        this.ashaId = ashaId;
+        this.ashaNumber = ashaNumber;
     }
 }

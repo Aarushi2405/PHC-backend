@@ -13,7 +13,12 @@ public interface FollowupScheduleModel {
     String getStatus();
     String getType();
 
-    String getAshaMobileNumber();
+    String getAshaNumber();
+
+    Long getAshaId();
+    Long getRchId();
+
+//    String getAshaMobileNumber();
 
 
 }

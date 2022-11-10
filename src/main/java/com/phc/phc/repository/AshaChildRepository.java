@@ -11,4 +11,6 @@ public interface AshaChildRepository extends JpaRepository<AshaChildMapping, Str
 
     @Query(value = "Select u.caseId from AshaChildMapping u")
     List<Integer> getAssignedChildren();
+
+
 }

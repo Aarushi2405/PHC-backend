@@ -38,6 +38,7 @@ public class FollowupScheduleController {
 
     @GetMapping("/followups-schedule")
     public List<FollowupScheduleModel> getFollowupScheduless(){
+//        System.out.println();
         return (List<FollowupScheduleModel>)this.followupScheduleRepository.getFollowupSchedules();
     }
 
@@ -63,12 +64,12 @@ public class FollowupScheduleController {
         for(int i=0;i<a.size();i++){
             Long sam = a.get(i).getSamNum();
             if(!child.containsKey(sam)){
-            FollowupsModel f = new FollowupsModel(sam, a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(), a.get(i).getAshaName(), 0L,new Date(0L),new Date(0L) );
+            FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L) );
             child.put(sam,f);}
-            System.out.println(DateFormat.format(a.get(i).getFollowupDate()));
-            System.out.println(a.get(i).getType());
-            System.out.println(a.get(i).getSamNum());
-            System.out.println(a.get(i).getStatus());
+//            System.out.println(DateFormat.format(a.get(i).getFollowupDate()));
+//            System.out.println(a.get(i).getType());
+//            System.out.println(a.get(i).getSamNum());
+//            System.out.println(a.get(i).getStatus());
             if(a.get(i).getStatus().equals("DONE")){
 
                 child.get(sam).setFollowupsDone(child.get(sam).getFollowupsDone()+1);

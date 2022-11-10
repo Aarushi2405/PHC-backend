@@ -19,10 +19,10 @@ public interface FollowupScheduleRepository extends JpaRepository<FollowupsSched
 //    @Query("SELECT f.caseDetail.samNum as samNum, f.caseDetail.childDemography.name from FollowupsSchedule f inner join (select u.caseDetail.caseId as caseId, COUNT(u.status) as followupsDone FROM FollowupsSchedule u where u.status='DONE' GROUP BY u.caseDetail.caseId) k where k.caseId=f.caseDetails.caseId")
 //    List<String> getFollowupSchedules();
 
-    @Query("Select u.caseDetail.caseId as caseId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m where u.caseDetail.caseId=m.caseId")
+    @Query("Select u.caseDetail.caseId as caseId, u.caseDetail.childDemography.rchId as rchId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaNumber,  m.ashaWorker.ashaId as ashaId, u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m where u.caseDetail.caseId=m.caseId")
     List<FollowupScheduleModel> getFollowupSchedules();
 
-    @Query("Select u.caseDetail.caseId as caseId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaMobileNumber,  u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m where u.caseDetail.caseId=m.caseId and u.caseDetail.caseId=?1 and u.status='DONE'")
+    @Query("Select u.caseDetail.caseId as caseId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaNumber,  u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m where u.caseDetail.caseId=m.caseId and u.caseDetail.caseId=?1 and u.status='DONE'")
     List<FollowupScheduleModel> getFollowupScheduleById(int caseId);
 
 
