@@ -21,14 +21,19 @@ public class NotificationController {
         this.notificationRepository = notificationRepository;
     }
 
-    @GetMapping("/discharged-patients")
-    public List<Notification> getDischargedPatients(){
-        return (List<Notification>) this.notificationRepository.findAll();
-    }
+//    @GetMapping("/discharged-patients")
+//    public List<Notification> getDischargedPatients(){
+//        return (List<Notification>) this.notificationRepository.findAll();
+//    }
 
     @GetMapping("/discharged-patient")
     public List<NotificationModel> getDischargedPatient(){
         return (List<NotificationModel>) this.notificationRepository.getNotification();
+    }
+
+    @GetMapping("/discharged-patient/{phcId}")
+    public List<NotificationModel> getDischargedPatient(@PathVariable int phcId){
+        return (List<NotificationModel>) this.notificationRepository.getNotificationPhc(phcId);
     }
 
     @PostMapping("/discharge-approve")
@@ -37,6 +42,17 @@ public class NotificationController {
 //        this.notificationRepository.approve(caseId);
         Notification n = this.notificationRepository.findByCaseId(caseId);
         n.setAcceptStatus("YES");
+        this.notificationRepository.save(n);
+//        System.out.println(n.getCaseId());
+    }
+
+    @PostMapping("/discharge-reject")
+    public void rejectDischarge(@RequestBody int caseId){
+        System.out.println("reject update:" +caseId);
+//        this.notificationRepository.approve(caseId);
+        Notification n = this.notificationRepository.findByCaseId(caseId);
+        n.setAcceptStatus("REJECT");
+
         this.notificationRepository.save(n);
 //        System.out.println(n.getCaseId());
     }

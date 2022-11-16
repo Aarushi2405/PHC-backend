@@ -31,10 +31,14 @@ public class AshaWorkerController {
     public AshaWorker getAshaById(@PathVariable int ashaId) {return (AshaWorker)this.ashaWorkerRepository.getAshaById(ashaId);
     }
 
+
+
     @RequestMapping("/asha-worker-search")
     public @ResponseBody List<AshaWorker> getAshaWorkerFromLocation(@RequestParam String ward, @RequestParam String area, @RequestParam String pincode) {
         return (List<AshaWorker>) this.ashaWorkerRepository.findByWardOrAreaOrPincode(ward, area, pincode);
     }
+
+
 
 
 }

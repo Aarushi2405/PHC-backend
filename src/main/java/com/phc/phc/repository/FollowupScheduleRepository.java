@@ -22,13 +22,22 @@ public interface FollowupScheduleRepository extends JpaRepository<FollowupsSched
     @Query("Select u.caseDetail.caseId as caseId, u.caseDetail.childDemography.rchId as rchId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaNumber,  m.ashaWorker.ashaId as ashaId, u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m where u.caseDetail.caseId=m.caseId")
     List<FollowupScheduleModel> getFollowupSchedules();
 
+    @Query("Select u.caseDetail.caseId as caseId, u.caseDetail.childDemography.rchId as rchId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaNumber,  m.ashaWorker.ashaId as ashaId, u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m, Notification n where u.caseDetail.caseId=m.caseId and n.caseId = u.caseDetail.caseId and n.phc=?1")
+    List<FollowupScheduleModel> getFollowupSchedulesPhc(int phcId);
+
+    @Query("Select u.caseDetail.caseId as caseId, u.caseDetail.childDemography.rchId as rchId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName,u.caseDetail.childDemography.mobileNumber as mobileNumber, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaNumber,  m.ashaWorker.ashaId as ashaId, u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m, Notification n where u.caseDetail.caseId=m.caseId and n.caseId = u.caseDetail.caseId and m.ashaWorker.ashaId=?1")
+    List<FollowupScheduleModel> getFollowupSchedulesAsha(int ashaId);
+
     @Query("Select u.caseDetail.caseId as caseId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.caseDetail.childDemography.name as childName, m.ashaWorker.name as ashaName, m.ashaWorker.phoneNumber as ashaNumber,  u.followupDate as followupDate, u.status as status, u.type as type from FollowupsSchedule u, AshaChildMapping m where u.caseDetail.caseId=m.caseId and u.caseDetail.caseId=?1 and u.status='DONE'")
     List<FollowupScheduleModel> getFollowupScheduleById(int caseId);
 
 
 
-    @Query("Select u.caseDetail.caseId as caseId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.followupDate as followupDate, u.type as type, u.status as status, u.type as type from FollowupsSchedule u where u.caseDetail.caseId = ?1")
+    @Query("Select u.caseDetail.childDemography.name as name, u.caseDetail.caseId as caseId, u.scheduleId as scheduleId, u.followupDetails.followupId as followupId, u.caseDetail.samNum as samNum, u.followupDate as followupDate, u.type as type, u.status as status, u.type as type from FollowupsSchedule u where u.caseDetail.caseId = ?1")
     List<FollowupDatesModel> getFollowupDates(int caseId);
+
+    @Query("Select u from FollowupsSchedule u where u.caseDetail.caseId = ?1")
+    List<FollowupsSchedule> getFollowupByCaseId(int caseId);
 
 //    FollowupsModel
 }

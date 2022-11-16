@@ -66,6 +66,35 @@ public class DischargeChildController {
 //        return (List<DischargedPatientModel>) this.dischargeChildRepository.getDischarge();
     }
 
+    @GetMapping("/patients/{phcId}")
+    public List<DischargedPatientModel> getDischargePhc(@PathVariable int phcId){
+        List<DischargedPatientModel> a = new ArrayList<DischargedPatientModel>();
+        List<DischargedPatientModel> b = this.dischargeChildRepository.getDischarge();
+        List<Integer> assigned = this.ashaChildRepository.getAssignedChildren();
+        List<Integer> approved = this.notificationRepository.getApproved();
+        List<Integer> phc = this.notificationRepository.getPhc(phcId);
+
+//        for(int i=0;i<assigned.size();i++){
+//            System.out.println(assigned.get(i));
+//            System.out.println(assigned.contains(1));
+//            System.out.println(assigned.contains(2));
+//            System.out.println(assigned.contains(5));
+//        }
+
+        for(int i=0;i<b.size();i++){
+//            System.out.println("VALUE" + b.get(i).getCaseId());
+
+            if(assigned.contains((b.get(i).getCaseId()))){
+//                System.out.println("HELLO HII");
+            }
+//            System.out.println(b.get(i).getSamId());
+//            System.out.println(b.get(i));
+            else if (approved.contains(b.get(i).getCaseId()) && phc.contains(b.get(i).getCaseId())){a.add(b.get(i));}
+        }
+        return a;
+//        return (List<DischargedPatientModel>) this.dischargeChildRepository.getDischarge();
+    }
+
     @GetMapping("/patient/{dischargeId}")
     public Optional<DischargeDetailsModel> getDischargeSummary(@PathVariable int dischargeId){
         return (Optional<DischargeDetailsModel>) this.dischargeChildRepository.findByDischargeId(dischargeId);

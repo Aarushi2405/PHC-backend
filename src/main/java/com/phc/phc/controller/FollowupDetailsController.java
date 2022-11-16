@@ -2,10 +2,12 @@ package com.phc.phc.controller;
 
 import com.phc.phc.entity.FollowupDetails;
 import com.phc.phc.entity.FollowupsSchedule;
+import com.phc.phc.model.AshaFollowupModel;
 import com.phc.phc.repository.FollowupDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -44,6 +46,10 @@ public class FollowupDetailsController {
         return (Optional<FollowupDetails>) this.followupDetailsRepository.findTopByOrderByFollowupIdDesc();
     }
 
+    @GetMapping("/asha-patient-followup/{caseId}")
+    public List<AshaFollowupModel> getFollowupAsha(@PathVariable int caseId){
+        return (List<AshaFollowupModel>) this.followupDetailsRepository.getFollowups(caseId);
+    }
 
 
 }

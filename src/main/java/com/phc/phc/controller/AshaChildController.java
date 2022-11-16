@@ -1,9 +1,11 @@
 package com.phc.phc.controller;
 
 import com.phc.phc.entity.AshaChildMapping;
+import com.phc.phc.entity.AshaWorker;
 import com.phc.phc.entity.CaseDetail;
 import com.phc.phc.entity.FollowupsSchedule;
 import com.phc.phc.model.AshaChildModel;
+import com.phc.phc.model.ChildDetailsModel;
 import com.phc.phc.repository.AshaChildRepository;
 import com.phc.phc.repository.AshaWorkerRepository;
 import com.phc.phc.repository.ChildDetailRepository;
@@ -40,6 +42,10 @@ public class AshaChildController {
     @GetMapping("/assigned-children")
     public List<Integer> getAssigned(){
         return (List<Integer>) this.ashaChildRepository.getAssignedChildren();
+    }
+
+    @GetMapping("/asha-followups/{ashaId}")
+    public List<ChildDetailsModel> getAshaFollowups(@PathVariable int ashaId) {return (List<ChildDetailsModel>)this.ashaChildRepository.getChildren(ashaId);
     }
 
 

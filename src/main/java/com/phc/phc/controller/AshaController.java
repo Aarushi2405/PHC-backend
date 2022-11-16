@@ -1,0 +1,32 @@
+package com.phc.phc.controller;
+import com.phc.phc.entity.Asha;
+import com.phc.phc.entity.Doctors;
+import com.phc.phc.repository.AshaRepository;
+import com.phc.phc.repository.DoctorsRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins="http://localhost:4200")
+public class AshaController {
+
+    private final AshaRepository ashaRepository;
+
+    public AshaController(AshaRepository ashaRepository){
+        this.ashaRepository = ashaRepository;
+    }
+
+    @GetMapping("/asha")
+    public List<Asha> getAsha(){
+        return (List<Asha>) this.ashaRepository.findAll();
+    }
+
+    @GetMapping("/asha/{username}")
+    public Asha getFromUsername(@PathVariable String username){
+        return (Asha) this.ashaRepository.findByUsername(username);
+    }
+}

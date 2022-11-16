@@ -13,5 +13,9 @@ public interface FollowupDatesModel {
     String getStatus();
     String getType();
 
+    Long getSamNum();
+
+    String getName();
+
 
 }

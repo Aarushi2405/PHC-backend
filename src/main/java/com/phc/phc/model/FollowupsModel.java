@@ -18,6 +18,16 @@ public class FollowupsModel {
     private String ashaNumber;
     private Long rchId;
 
+    private String mobileNumber;
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
     public Long getRchId() {
         return rchId;
     }
@@ -133,7 +143,7 @@ public class FollowupsModel {
         this.followupId = followupId;
     }
 
-    public FollowupsModel(Long samNum, Long rchId, Long caseId, Long followupId, Long scheduleId, String childName, String ashaName, Long ashaId, String ashaNumber, Long followupsDone, Date nextCommunity, Date nextNrc) {
+    public FollowupsModel(Long samNum, Long rchId, Long caseId, Long followupId, Long scheduleId, String childName, String mobileNumber, String ashaName, Long ashaId, String ashaNumber, Long followupsDone, Date nextCommunity, Date nextNrc) {
         this.caseId = caseId;
         this.rchId = rchId;
         this.followupId = followupId;
@@ -146,5 +156,6 @@ public class FollowupsModel {
         this.nextNrc = nextNrc;
         this.ashaId = ashaId;
         this.ashaNumber = ashaNumber;
+        this.mobileNumber = mobileNumber;
     }
 }
