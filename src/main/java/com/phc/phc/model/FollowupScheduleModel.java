@@ -18,6 +18,7 @@ public interface FollowupScheduleModel {
     Long getAshaId();
     Long getRchId();
     String getMobileNumber();
+    String getPlace();
 
 //    String getAshaMobileNumber();
 

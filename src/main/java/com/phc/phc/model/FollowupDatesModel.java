@@ -17,5 +17,7 @@ public interface FollowupDatesModel {
 
     String getName();
 
+    String getPlace();
+
 
 }

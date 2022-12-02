@@ -69,6 +69,8 @@ public class FollowupDetails {
     @Column(name="treatment")
     private String treatment;
 
+    @Column(name="place")
+    private String place;
 
     @JsonIgnore
     @OneToMany(mappedBy = "followupDetails", cascade=CascadeType.ALL)

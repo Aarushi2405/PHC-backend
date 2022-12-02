@@ -1,5 +1,6 @@
 package com.phc.phc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -30,9 +31,29 @@ public class AshaWorker {
     @Column(name="phone_number")
     private String phoneNumber;
 
+    @Column(name="phc_name")
+    private String phcName;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "ashaWorker")
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<AshaChildMapping> ashaChildMappings;
+
+    public String getPhcName() {
+        return phcName;
+    }
+
+    public void setPhcName(String phcName) {
+        this.phcName = phcName;
+    }
+
+    public List<AshaChildMapping> getAshaChildMappings() {
+        return ashaChildMappings;
+    }
+
+    public void setAshaChildMappings(List<AshaChildMapping> ashaChildMappings) {
+        this.ashaChildMappings = ashaChildMappings;
+    }
 
     public int getAshaId() {
         return ashaId;

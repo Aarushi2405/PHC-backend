@@ -38,6 +38,21 @@ public class AshaWorkerController {
         return (List<AshaWorker>) this.ashaWorkerRepository.findByWardOrAreaOrPincode(ward, area, pincode);
     }
 
+    @PutMapping("/asha-worker")
+    private AshaWorker update(@RequestBody AshaWorker asha){
+        this.ashaWorkerRepository.save(asha);
+        return asha;
+    }
+
+    @DeleteMapping("/asha-worker/{ashaId}")
+    private void deleteAsha(@PathVariable("ashaId") int ashaId ){
+        this.ashaWorkerRepository.deleteById(ashaId);
+    }
+
+    @PostMapping("/asha-worker")
+    void addAsha(@RequestBody AshaWorker asha){
+        this.ashaWorkerRepository.save(asha);
+    }
 
 
 
