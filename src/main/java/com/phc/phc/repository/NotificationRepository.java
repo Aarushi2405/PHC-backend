@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer>  {
 
-    @Query("Select u.date as date, c.caseId as caseId,c.samNum as samId, c.childDemography.rchId as rchId, c.childDemography.name as name, c.childDemography.addressLine1 as address, c.childDemography.pincode as pincode, c.childDemography.mobileNumber as mobileNumber from Notification u, CaseDetail c where u.caseId=c.caseId and u.acceptStatus='NO'")
+    @Query("Select u.date as date, c.caseId as caseId,c.samNum as samId, c.childDemography.rchId as rchId, c.childDemography.name as name, c.childDemography.addressLine1 as address, c.childDemography.pincode as pincode, c.childDemography.mobileNumber as mobileNumber from Notification u, CaseDetail c where u.caseId=c.caseId and (u.acceptStatus='NO' or u.acceptStatus='No')")
     List<NotificationModel> getNotification();
 
     @Query("Select u.date as date, c.caseId as caseId,c.samNum as samId, c.childDemography.rchId as rchId, c.childDemography.name as name, c.childDemography.addressLine1 as address, c.childDemography.pincode as pincode, c.childDemography.mobileNumber as mobileNumber from Notification u, CaseDetail c where u.caseId=c.caseId and u.acceptStatus='NO' and u.phc=?1")
