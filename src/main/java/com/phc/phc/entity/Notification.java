@@ -25,6 +25,28 @@ public class Notification {
     @Column(name="date")
     private Timestamp date;
 
+    @Column(name="reject_reason")
+    private String rejectReason;
+
+    @Column(name="suggested_phc")
+    private String suggestedPhc;
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
+
+    public String getSuggestedPhc() {
+        return suggestedPhc;
+    }
+
+    public void setSuggestedPhc(String suggestedPhc) {
+        this.suggestedPhc = suggestedPhc;
+    }
+
     public Timestamp getDate() {
         return date;
     }

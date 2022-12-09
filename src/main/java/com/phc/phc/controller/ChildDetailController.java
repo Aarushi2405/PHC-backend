@@ -2,6 +2,7 @@ package com.phc.phc.controller;
 
 import com.phc.phc.entity.CaseDetail;
 import com.phc.phc.entity.DischargeChildDetail;
+import com.phc.phc.entity.WflRefFromNrc;
 import com.phc.phc.model.ChildDetailsModel;
 import com.phc.phc.model.DischargeDetailsModel;
 import com.phc.phc.model.DischargeModel;
@@ -38,5 +39,10 @@ public class ChildDetailController {
     @GetMapping("/track-child")
     public List<ChildDetailsModel> getChild() {return this.childDetailRepository.getChild();}
 
+    @GetMapping("/track-child/{phcId}")
+    public List<ChildDetailsModel> getChildPhc(@PathVariable int phcId) {return this.childDetailRepository.getChildPhc(phcId);}
+
+    @GetMapping("sd-range/{caseId}")
+    public List<WflRefFromNrc> getSdRange(@PathVariable int caseId) {return this.childDetailRepository.getSdRange(caseId);}
 
 }

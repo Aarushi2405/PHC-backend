@@ -3,6 +3,7 @@ package com.phc.phc.controller;
 import com.phc.phc.entity.FollowupDetails;
 import com.phc.phc.entity.Notification;
 import com.phc.phc.model.NotificationModel;
+import com.phc.phc.model.RejectModel;
 import com.phc.phc.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,6 +54,18 @@ public class NotificationController {
         Notification n = this.notificationRepository.findByCaseId(caseId);
         n.setAcceptStatus("REJECT");
 
+        this.notificationRepository.save(n);
+//        System.out.println(n.getCaseId());
+    }
+
+    @PostMapping("/reject-phc")
+    public void rejectDischarge(@RequestBody RejectModel rejectModel){
+        System.out.println("reject update:" +rejectModel);
+//        this.notificationRepository.approve(caseId);
+        Notification n = this.notificationRepository.findByCaseId(rejectModel.getCaseId());
+        n.setAcceptStatus("REJECT");
+        n.setRejectReason(rejectModel.getRejectReason());
+        n.setSuggestedPhc(rejectModel.getSuggestedPhc());
         this.notificationRepository.save(n);
 //        System.out.println(n.getCaseId());
     }

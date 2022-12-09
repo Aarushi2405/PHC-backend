@@ -68,7 +68,7 @@ public class FollowupScheduleController {
         for(int i=0;i<a.size();i++){
             Long sam = a.get(i).getSamNum();
             if(!child.containsKey(sam)){
-            FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(),a.get(i).getMobileNumber(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L) );
+            FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(),a.get(i).getMobileNumber(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L),new Date(0L), new Date(0L) );
             child.put(sam,f);}
 //            System.out.println(DateFormat.format(a.get(i).getFollowupDate()));
 //            System.out.println(a.get(i).getType());
@@ -77,6 +77,12 @@ public class FollowupScheduleController {
             if(a.get(i).getStatus().equals("DONE")){
 
                 child.get(sam).setFollowupsDone(child.get(sam).getFollowupsDone()+1);
+                if(a.get(i).getType().equals("COMMUNITY")){
+                    child.get(sam).setLastCommunity(a.get(i).getFollowupDate());
+                }
+                else{
+                    child.get(sam).setLastNrc(a.get(i).getFollowupDate());
+                }
             }
             else{
                 if(a.get(i).getType().equals("COMMUNITY")){
@@ -109,7 +115,7 @@ public class FollowupScheduleController {
         for(int i=0;i<a.size();i++){
             Long sam = a.get(i).getSamNum();
             if(!child.containsKey(sam)){
-                FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(),a.get(i).getMobileNumber(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L) );
+                FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(),a.get(i).getMobileNumber(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L), new Date(0L), new Date(0L) );
                 child.put(sam,f);}
 //            System.out.println(DateFormat.format(a.get(i).getFollowupDate()));
 //            System.out.println(a.get(i).getType());
@@ -118,6 +124,12 @@ public class FollowupScheduleController {
             if(a.get(i).getStatus().equals("DONE")){
 
                 child.get(sam).setFollowupsDone(child.get(sam).getFollowupsDone()+1);
+                if(a.get(i).getType().equals("COMMUNITY")){
+                    child.get(sam).setLastCommunity(a.get(i).getFollowupDate());
+                }
+                else{
+                    child.get(sam).setLastNrc(a.get(i).getFollowupDate());
+                }
             }
             else{
                 if(a.get(i).getType().equals("COMMUNITY")){
@@ -151,7 +163,7 @@ public class FollowupScheduleController {
         for(int i=0;i<a.size();i++){
             Long sam = a.get(i).getSamNum();
             if(!child.containsKey(sam)){
-                FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(),a.get(i).getMobileNumber(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L) );
+                FollowupsModel f = new FollowupsModel(sam, a.get(i).getRchId(), a.get(i).getCaseId(), a.get(i).getFollowupId(), a.get(i).getScheduleId(), a.get(i).getChildName(),a.get(i).getMobileNumber(), a.get(i).getAshaName(), a.get(i).getAshaId(), a.get(i).getAshaNumber(), 0L,new Date(0L),new Date(0L), new Date(0L), new Date(0L) );
                 child.put(sam,f);}
 //            System.out.println(DateFormat.format(a.get(i).getFollowupDate()));
 //            System.out.println(a.get(i).getType());
@@ -160,6 +172,13 @@ public class FollowupScheduleController {
             if(a.get(i).getStatus().equals("DONE")){
 
                 child.get(sam).setFollowupsDone(child.get(sam).getFollowupsDone()+1);
+                if(a.get(i).getType().equals("COMMUNITY")){
+                    child.get(sam).setLastCommunity(a.get(i).getFollowupDate());
+                }
+                else{
+                    child.get(sam).setLastNrc(a.get(i).getFollowupDate());
+                }
+
             }
             else{
                 if(a.get(i).getType().equals("COMMUNITY")){
@@ -216,6 +235,18 @@ public class FollowupScheduleController {
         Optional<FollowupDetails> k = this.followupDetailsRepository.findTopByOrderByFollowupIdDesc();
         x.setFollowupDetails(k.get());
         x.setStatus("DONE");
+        this.followupScheduleRepository.save(x);
+    }
+
+    @PostMapping("/followup-cancel")
+    public void cancelFollowup(@RequestBody int data){
+
+        Optional<FollowupsSchedule> f = followupScheduleRepository.findById(data);
+        FollowupsSchedule x = f.get();
+        Optional<FollowupDetails> k = this.followupDetailsRepository.findTopByOrderByFollowupIdDesc();
+        x.setFollowupDetails(k.get());
+        System.out.println("FOLLOWUP "+x);
+        x.setStatus("CANCELLED");
         this.followupScheduleRepository.save(x);
     }
 

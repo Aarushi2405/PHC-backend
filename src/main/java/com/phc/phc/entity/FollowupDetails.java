@@ -72,6 +72,14 @@ public class FollowupDetails {
     @Column(name="place")
     private String place;
 
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
     @JsonIgnore
     @OneToMany(mappedBy = "followupDetails", cascade=CascadeType.ALL)
     private List<FollowupsSchedule> followupsSchedule;

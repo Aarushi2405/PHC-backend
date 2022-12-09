@@ -11,6 +11,8 @@ public class FollowupsModel {
     private String ashaName;
     private Long followupsDone;
     private Date nextCommunity;
+    private Date lastCommunity;
+    private Date lastNrc;
     private Date nextNrc;
 
     private Long ashaId;
@@ -19,6 +21,22 @@ public class FollowupsModel {
     private Long rchId;
 
     private String mobileNumber;
+
+    public Date getLastCommunity() {
+        return lastCommunity;
+    }
+
+    public void setLastCommunity(Date lastCommunity) {
+        this.lastCommunity = lastCommunity;
+    }
+
+    public Date getLastNrc() {
+        return lastNrc;
+    }
+
+    public void setLastNrc(Date lastNrc) {
+        this.lastNrc = lastNrc;
+    }
 
     public String getMobileNumber() {
         return mobileNumber;
@@ -143,7 +161,7 @@ public class FollowupsModel {
         this.followupId = followupId;
     }
 
-    public FollowupsModel(Long samNum, Long rchId, Long caseId, Long followupId, Long scheduleId, String childName, String mobileNumber, String ashaName, Long ashaId, String ashaNumber, Long followupsDone, Date nextCommunity, Date nextNrc) {
+    public FollowupsModel(Long samNum, Long rchId, Long caseId, Long followupId, Long scheduleId, String childName, String mobileNumber, String ashaName, Long ashaId, String ashaNumber, Long followupsDone, Date nextCommunity, Date nextNrc, Date lastCommunity, Date lastNrc) {
         this.caseId = caseId;
         this.rchId = rchId;
         this.followupId = followupId;
@@ -157,5 +175,7 @@ public class FollowupsModel {
         this.ashaId = ashaId;
         this.ashaNumber = ashaNumber;
         this.mobileNumber = mobileNumber;
+        this.lastCommunity = lastCommunity;
+        this.lastNrc = lastNrc;
     }
 }

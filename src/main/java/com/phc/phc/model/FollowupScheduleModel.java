@@ -20,6 +20,8 @@ public interface FollowupScheduleModel {
     String getMobileNumber();
     String getPlace();
 
+    Long getSdRange();
+
 //    String getAshaMobileNumber();
 
 
