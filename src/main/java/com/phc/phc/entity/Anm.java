@@ -4,13 +4,9 @@ package com.phc.phc.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="nrc_doctors")
-public class NrcDoctors {
+@Table(name="anm")
+public class Anm {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="nrc_doctor_id")
-    private int nrcDoctorId ;
 
     @Column(name="username")
     private String username;
@@ -18,18 +14,27 @@ public class NrcDoctors {
     @Column(name="password")
     private String password;
 
-    @Column(name="nrc_id")
-    private int nrcId;
+    @Column(name="phc_id")
+    private int phcId;
 
     @Column(name="status")
     private String status;
 
-    public int getNrcDoctorId() {
-        return nrcDoctorId;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="anm_id")
+    private String doctorId;
+
+    public String getdoctorId() {
+        return doctorId;
     }
 
-    public void setNrcDoctorId(int nrcDoctorId) {
-        this.nrcDoctorId = nrcDoctorId;
+    public void setdoctorId(String anmId) {
+        this.doctorId = anmId;
+    }
+
+    public void setPhcId(int phcId) {
+        this.phcId = phcId;
     }
 
     public String getStatus() {
@@ -56,11 +61,8 @@ public class NrcDoctors {
         this.password = password;
     }
 
-    public int getNrcId() {
-        return nrcId;
+    public int getPhcId() {
+        return phcId;
     }
 
-    public void setNrcId(int Id) {
-        this.nrcId = Id;
-    }
 }

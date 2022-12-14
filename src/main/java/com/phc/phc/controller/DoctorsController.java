@@ -1,11 +1,10 @@
 package com.phc.phc.controller;
 
 import com.phc.phc.entity.Doctors;
+import com.phc.phc.entity.NrcDetails;
+import com.phc.phc.entity.PhcDetails;
 import com.phc.phc.repository.DoctorsRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,19 @@ public class DoctorsController {
     @GetMapping("/doctor/{username}")
     public Doctors getFromUsername(@PathVariable String username){
         return (Doctors) this.doctorsRepository.findByUsername(username);
+    }
+
+    @PostMapping("/doctors")
+    void addDoctor(@RequestBody Doctors doctor){
+
+        doctor.setStatus("ACTIVE");
+        this.doctorsRepository.save(doctor);
+    }
+
+    @PostMapping("/doctor-deactivate")
+    void deactivate(@RequestBody int doctorId){
+        Doctors doc = this.doctorsRepository.getReferenceById(doctorId);
+        doc.setStatus("INACTIVE");
+        this.doctorsRepository.save(doc);
     }
 }

@@ -37,6 +37,15 @@ public class NrcDetailsController {
 
     @PostMapping("/nrc-details")
     void addNrcDetails(@RequestBody NrcDetails nrc){
+
+        nrc.setStatus("ACTIVE");
+        this.nrcDetailsRepository.save(nrc);
+    }
+
+    @PostMapping("/nrc-deactivate")
+    void deactivate(@RequestBody int nrcId){
+        NrcDetails nrc = this.nrcDetailsRepository.getReferenceById(nrcId);
+        nrc.setStatus("INACTIVE");
         this.nrcDetailsRepository.save(nrc);
     }
 

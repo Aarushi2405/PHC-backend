@@ -23,6 +23,17 @@ public class PhcDetails {
     @Column(name="contact_number")
     private String contactNumber;
 
+    @Column(name="status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public int getPhcId() {
         return phcId;
     }

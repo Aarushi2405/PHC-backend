@@ -39,6 +39,17 @@ public class AshaWorker {
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<AshaChildMapping> ashaChildMappings;
 
+    @Column(name="status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getPhcName() {
         return phcName;
     }

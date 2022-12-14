@@ -1,11 +1,10 @@
 package com.phc.phc.controller;
 
+import com.phc.phc.entity.Doctors;
+import com.phc.phc.entity.NrcDetails;
 import com.phc.phc.entity.NrcDoctors;
 import com.phc.phc.repository.NrcDoctorsRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,19 @@ public class NrcDoctorsController {
     @GetMapping("/nrc-doctor/{username}")
     public NrcDoctors getFromUsername(@PathVariable String username){
         return (NrcDoctors) this.doctorsRepository.findByUsername(username);
+    }
+
+    @PostMapping("/nrc-doctors")
+    void addDoctor(@RequestBody NrcDoctors doctor){
+
+        doctor.setStatus("ACTIVE");
+        this.doctorsRepository.save(doctor);
+    }
+
+    @PostMapping("/nrc-doctor-deactivate")
+    void deactivate(@RequestBody int nrcDoctorId){
+        NrcDoctors doctor = this.doctorsRepository.getReferenceById(nrcDoctorId);
+        doctor.setStatus("INACTIVE");
+        this.doctorsRepository.save(doctor);
     }
 }

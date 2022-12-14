@@ -9,6 +9,9 @@ public class Doctors {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="doctor_id")
+    private int doctorId ;
+
     @Column(name="username")
     private String username;
 
@@ -17,6 +20,29 @@ public class Doctors {
 
     @Column(name="phc_id")
     private int phcId;
+
+    @Column(name="status")
+    private String status;
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public void setPhcId(int phcId) {
+        this.phcId = phcId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getUsername() {
         return username;

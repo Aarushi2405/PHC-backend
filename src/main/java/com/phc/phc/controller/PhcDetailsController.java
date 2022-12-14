@@ -38,6 +38,15 @@ public class PhcDetailsController {
 
     @PostMapping("/phc-details")
     void addPhcDetails(@RequestBody PhcDetails phc){
+
+        phc.setStatus("ACTIVE");
+        this.phcDetailsRepository.save(phc);
+    }
+
+    @PostMapping("/phc-deactivate")
+    void deactivate(@RequestBody int phcId){
+        PhcDetails phc = this.phcDetailsRepository.getReferenceById(phcId);
+        phc.setStatus("INACTIVE");
         this.phcDetailsRepository.save(phc);
     }
 

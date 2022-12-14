@@ -3,6 +3,7 @@ package com.phc.phc.controller;
 import com.phc.phc.entity.AshaChildMapping;
 import com.phc.phc.entity.AshaWorker;
 import com.phc.phc.entity.DischargeChildDetail;
+import com.phc.phc.entity.NrcDetails;
 import com.phc.phc.repository.AshaChildRepository;
 import com.phc.phc.repository.AshaWorkerRepository;
 import com.phc.phc.repository.DischargeChildRepository;
@@ -51,9 +52,17 @@ public class AshaWorkerController {
 
     @PostMapping("/asha-worker")
     void addAsha(@RequestBody AshaWorker asha){
+
+        asha.setStatus("ACTIVE");
         this.ashaWorkerRepository.save(asha);
     }
 
+    @PostMapping("/asha-deactivate")
+    void deactivate(@RequestBody int ashaId){
+        AshaWorker asha = this.ashaWorkerRepository.getReferenceById(ashaId);
+        asha.setStatus("INACTIVE");
+        this.ashaWorkerRepository.save(asha);
+    }
 
 
 }
